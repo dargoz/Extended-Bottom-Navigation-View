@@ -273,16 +273,17 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     private void setMenuBackground(int drawable) {
-
+        int imageDrawable = drawable == -1 ? R.color.default_background_color : drawable;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            menuBackground.setBackgroundColor(getResources().getColor(drawable, null));
+            menuBackground.setBackgroundColor(getResources().getColor(imageDrawable, null));
         } else {
-            menuBackground.setBackgroundColor(getResources().getColor(drawable));
+            menuBackground.setBackgroundColor(getResources().getColor(imageDrawable));
         }
     }
 
     private void setItemsTextColor(int menuItemTextColor) {
-        ColorStateList colorStateList = getResources().getColorStateList(menuItemTextColor);
+        ColorStateList colorStateList = getResources().getColorStateList(menuItemTextColor == -1 ?
+                R.color.default_color_state : menuItemTextColor);
         for(int i = 0; i < menu.size(); i++) {
             LinearLayout menuLayout = getMenuChildAt(i);
             TextView textView = (TextView) menuLayout.getChildAt(1);
