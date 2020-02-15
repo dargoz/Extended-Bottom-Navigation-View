@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/home_title_text"
+        android:icon="@drawable/icon_home"
+        />
+    <item
+        android:title="@string/transaction_title_text"
+        android:icon="@drawable/icon_credit"
+        />
+    <item
+        android:title="@string/scan_title_text"
+        android:icon="@drawable/baseline_home_black_24"
+        />
+    <item
+        android:title="@string/notification_title_text"
+        android:icon="@drawable/icon_notification"
+        />
+    <item
+        android:title="@string/account_title_text"
+        android:icon="@drawable/icon_person"
+        />
+</menu>
