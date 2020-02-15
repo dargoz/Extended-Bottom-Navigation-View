@@ -3,7 +3,6 @@ package com.dargoz.extendedbottomnavigationview;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -43,11 +42,13 @@ public class BottomNavigationBar extends FrameLayout {
     private MenuInflater menuInflater;
     ConstraintLayout bottomNavBaseContainer;
     ImageView menuBackground;
+
     private Menu menu;
+    private MenuLayout menuItemLayout;
+    private MenuOnClickListener subMenuOnClickListener;
+
     private int currentSelectedItem;
     private int highlightMenuPosition = -1;
-    private MenuLayout menuItemLayout;
-
 
     public BottomNavigationBar(@NonNull Context context) {
         super(context);
@@ -77,6 +78,11 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     @SuppressWarnings("unused")
+    public void setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener) {
+        this.subMenuOnClickListener = subMenuOnClickListener;
+    }
+
+    @SuppressWarnings("unused")
     public void setHighlightMenuPosition(int position) {
         this.highlightMenuPosition = position;
         LinearLayout menuLayout = getMenuChildAt(position);
@@ -85,11 +91,14 @@ public class BottomNavigationBar extends FrameLayout {
         titleText.setSelected(true);
     }
 
+    @SuppressWarnings("unused")
     public void addSubMenu(int menuResId, int indexRootMenu) {
         Context context = getContext();
         Menu subMenu = new BottomNavigationMenu(context);
         this.getMenuInflater().inflate(menuResId, subMenu);
         menuItemLayout = new SubMenuLayout(context);
+        menuItemLayout.setOnMenuClickListener(subMenuOnClickListener);
+
         LinearLayout menuLayout = getMenuChildAt(indexRootMenu);
         LinearLayout subMenuContainer = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
