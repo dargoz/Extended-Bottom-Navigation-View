@@ -1,0 +1,2 @@
+include ':app', ':extendedbottomnavigationview'
+rootProject.name='Extended Bottom Navigation View'
