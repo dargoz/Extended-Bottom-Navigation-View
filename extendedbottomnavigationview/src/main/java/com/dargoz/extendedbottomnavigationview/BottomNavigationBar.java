@@ -3,6 +3,8 @@ package com.dargoz.extendedbottomnavigationview;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -93,7 +95,13 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setShape(GradientDrawable.RECTANGLE);
+            drawable.setCornerRadius(10);
+            drawable.setColor(getResources().getColor(R.color.default_sub_menu_background_color_state));
+        subMenuContainer.setBackground(drawable);    
         for (int index = 0 ; index < subMenu.size(); index++) {
+            Log.i("DRG","index : " + index);
             LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
             subMenuContainer.addView(subMenuLayout);
         }
