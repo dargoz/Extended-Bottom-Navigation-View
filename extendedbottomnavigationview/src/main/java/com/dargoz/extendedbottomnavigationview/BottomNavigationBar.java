@@ -30,6 +30,7 @@ import java.util.Arrays;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static com.dargoz.extendedbottomnavigationview.Constants.NULL_EXCEPTION_WORDING;
 
 
 public class BottomNavigationBar extends FrameLayout {
@@ -41,7 +42,7 @@ public class BottomNavigationBar extends FrameLayout {
     private Menu menu;
     private int currentSelectedItem;
     private int highlightMenuPosition = -1;
-    private  MenuOnClickListener menuOnClickListener;
+    private MenuOnClickListener menuOnClickListener;
 
 
     public BottomNavigationBar(@NonNull Context context) {
@@ -74,13 +75,38 @@ public class BottomNavigationBar extends FrameLayout {
         this.highlightMenuPosition = position;
         LinearLayout menuLayout = getMenuChildAt(position);
         TextView titleText = (TextView) menuLayout.getChildAt(1);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT,32);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 32);
         titleText.setSelected(true);
+    }
+
+    public void addSubMenu(int menuResId, int indexRootMenu) {
+        Context context = getContext();
+        Menu subMenu = new BottomNavigationMenu(context);
+        this.getMenuInflater().inflate(menuResId, subMenu);
+
+        LinearLayout menuLayout = getMenuChildAt(indexRootMenu);
+        LinearLayout subMenuContainer = new LinearLayout(context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        subMenuContainer.setLayoutParams(params);
+        subMenuContainer.setId(View.generateViewId());
+        subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
+        for (int index = 0 ; index < subMenu.size(); index++) {
+            LinearLayout subMenuLayout = constructMenuItem(subMenu, context, index);
+            subMenuContainer.addView(subMenuLayout);
+        }
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(bottomNavBaseContainer);
+        constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
+                menuLayout.getId(), ConstraintSet.TOP,
+                getResources().getDimensionPixelSize(R.dimen.baseline_8dp));
+        constraintSet.connect(subMenuContainer.getId(), ConstraintSet.START,
+                menuLayout.getId(), ConstraintSet.START, 0);
+        constraintSet.applyTo(bottomNavBaseContainer);
     }
 
     private void init(Context context) {
         rootView = LayoutInflater.from(context)
-                .inflate(R.layout.bottom_navigation_base_layout,this);
+                .inflate(R.layout.bottom_navigation_base_layout, this);
         menu = new BottomNavigationMenu(context);
     }
 
@@ -103,11 +129,11 @@ public class BottomNavigationBar extends FrameLayout {
                 .getResourceId(R.styleable.BottomNavigationBar_menuItemTextColor, -1);
         highlightMenuPosition = tmpArrStyleAttributes
                 .getInt(R.styleable.BottomNavigationBar_highlightMenuPosition, -1);
-        Log.i("DRG","menuResId : " + menuResId);
+        Log.i("DRG", "menuResId : " + menuResId);
         this.getMenuInflater().inflate(menuResId, this.menu);
-        for(int i=0; i<menu.size() ;i++) {
+        for (int i = 0; i < menu.size(); i++) {
 
-            Log.i("DRG","get bottom_nav_menu title : " + menu.getItem(i).getTitle());
+            Log.i("DRG", "get bottom_nav_menu title : " + menu.getItem(i).getTitle());
         }
         buildMenu(menu, context);
         setMenuBackground(menuBackgroundColor);
@@ -131,7 +157,7 @@ public class BottomNavigationBar extends FrameLayout {
 
     private void addMenuToContainer(final Menu menu, Context context) {
 
-        for (int itemIndex = 0; itemIndex < menu.size() ; itemIndex++) {
+        for (int itemIndex = 0; itemIndex < menu.size(); itemIndex++) {
             LinearLayout menuItemContainer = constructMenuItem(menu, context, itemIndex);
             bottomNavBaseContainer.addView(menuItemContainer);
         }
@@ -139,19 +165,16 @@ public class BottomNavigationBar extends FrameLayout {
 
     @NonNull
     private LinearLayout constructMenuItem(final Menu menu, Context context, int itemIndex) {
-
-
-
         TextView titleText = new TextView(context);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, 0, (float) 0.3);
         titleParams.setMargins(
                 0, getResources().getDimensionPixelSize(R.dimen.baseline_2dp),
-                0 ,0);
+                0, 0);
         titleText.setLayoutParams(titleParams);
         titleText.setText(menu.getItem(itemIndex).getTitle());
         titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT,26);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
         titleText.setTypeface(Typeface.DEFAULT_BOLD);
         titleText.setSelected(false);
 
@@ -184,7 +207,7 @@ public class BottomNavigationBar extends FrameLayout {
         menuItemContainer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(menuOnClickListener != null) {
+                if (menuOnClickListener != null) {
                     menuOnClickListener.onMenuItemClick(menu, itemIndex);
                 }
             }
@@ -210,38 +233,38 @@ public class BottomNavigationBar extends FrameLayout {
             constraintSet.clone(bottomNavBaseContainer);
             View menuItemContainer = bottomNavBaseContainer.getChildAt(menuIndex);
             viewIds[menuIndex] = menuItemContainer.getId();
-            Log.d("DRG","current id : " + menuItemContainer.getId());
+            Log.d("DRG", "current id : " + menuItemContainer.getId());
             int id = previousItem != null ? previousItem.getId() : -1;
 
-            Log.d("DRG","prev id : " + id);
-            Log.w("DRG"," ===================== ");
+            Log.d("DRG", "prev id : " + id);
+            Log.w("DRG", " ===================== ");
 
-            if(previousItem != null) {
+            if (previousItem != null) {
                 constraintSet.connect(
                         menuItemContainer.getId(), ConstraintSet.START,
-                        previousItem.getId(), ConstraintSet.END,0);
+                        previousItem.getId(), ConstraintSet.END, 0);
             } else {
                 constraintSet.connect(
                         menuItemContainer.getId(), ConstraintSet.START,
-                        ConstraintSet.PARENT_ID, ConstraintSet.START,0);
+                        ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
             }
 
-            if(menuIndex == menu.size() - 1) {
+            if (menuIndex == menu.size() - 1) {
                 constraintSet.connect(
                         menuItemContainer.getId(), ConstraintSet.END,
-                        ConstraintSet.PARENT_ID, ConstraintSet.END,0);
+                        ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
             } else {
-                if(previousItem != null) {
+                if (previousItem != null) {
                     constraintSet.connect(
                             previousItem.getId(), ConstraintSet.END,
-                            menuItemContainer.getId(), ConstraintSet.START,0);
+                            menuItemContainer.getId(), ConstraintSet.START, 0);
                 }
             }
             previousItem = menuItemContainer;
 
         }
 
-        Log.v("DRG","view Ids : " + Arrays.toString(viewIds));
+        Log.v("DRG", "view Ids : " + Arrays.toString(viewIds));
 
 
         constraintSet.createHorizontalChain(
@@ -259,7 +282,7 @@ public class BottomNavigationBar extends FrameLayout {
         ConstraintLayout.LayoutParams bgParams = new ConstraintLayout
                 .LayoutParams(MATCH_PARENT, 0);
         menuBackground.setLayoutParams(bgParams);
-        bottomNavBaseContainer.addView(menuBackground,0);
+        bottomNavBaseContainer.addView(menuBackground, 0);
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(bottomNavBaseContainer);
         constraintSet.connect(
@@ -284,7 +307,7 @@ public class BottomNavigationBar extends FrameLayout {
     private void setItemsTextColor(int menuItemTextColor) {
         ColorStateList colorStateList = getResources().getColorStateList(menuItemTextColor == -1 ?
                 R.color.default_color_state : menuItemTextColor);
-        for(int i = 0; i < menu.size(); i++) {
+        for (int i = 0; i < menu.size(); i++) {
             LinearLayout menuLayout = getMenuChildAt(i);
             TextView textView = (TextView) menuLayout.getChildAt(1);
             textView.setTextColor(colorStateList);
@@ -292,13 +315,13 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     public void setSelectedMenuItem(int itemIndex) {
-        if(itemIndex != highlightMenuPosition) {
+        if (itemIndex != highlightMenuPosition) {
             try {
                 setMenuSelected(currentSelectedItem, false);
                 setMenuSelected(itemIndex, true);
                 currentSelectedItem = itemIndex;
             } catch (Exception e) {
-                Log.w(TAG ,"Exception on setSelectedMenuItem " + e.getMessage());
+                Log.w(TAG, "Exception on setSelectedMenuItem " + e.getMessage());
             }
         }
     }
@@ -312,7 +335,11 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     private LinearLayout getMenuChildAt(int itemIndex) {
-        return (LinearLayout) bottomNavBaseContainer.getChildAt(itemIndex + 1);
+        try {
+            return (LinearLayout) bottomNavBaseContainer.getChildAt(itemIndex + 1);
+        } catch (Exception e) {
+            throw new NullPointerException(NULL_EXCEPTION_WORDING + itemIndex);
+        }
     }
 
 }
