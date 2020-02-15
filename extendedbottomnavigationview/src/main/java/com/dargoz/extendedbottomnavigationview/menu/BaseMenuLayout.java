@@ -20,11 +20,16 @@ import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class BaseMenuLayout implements MenuLayout {
-    private MenuOnClickListener menuOnClickListener;
+    MenuOnClickListener menuOnClickListener;
     private Context context;
 
     public BaseMenuLayout(Context context) {
         this.context = context;
+    }
+
+    @Override
+    public void setOnMenuClickListener(MenuOnClickListener listener) {
+        menuOnClickListener = listener;
     }
 
     @Override
@@ -53,13 +58,8 @@ public class BaseMenuLayout implements MenuLayout {
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
     }
 
-    @Override
-    public void setOnMenuClickListener(MenuOnClickListener listener) {
-        menuOnClickListener = listener;
-    }
-
     @NonNull
-    private LinearLayout buildMenuItemLayout(final Menu menu, Context context,
+    protected LinearLayout buildMenuItemLayout(final Menu menu, Context context,
                                              TextView titleText, ImageView imageView, final int itemIndex) {
         LinearLayout menuItemContainer = new LinearLayout(context);
         menuItemContainer.setOrientation(LinearLayout.VERTICAL);

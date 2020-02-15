@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val bottomNavBar = findViewById<BottomNavigationBar>(R.id.bottom_navigation_menu)
-        bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 1);
+        bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 1)
     }
 }

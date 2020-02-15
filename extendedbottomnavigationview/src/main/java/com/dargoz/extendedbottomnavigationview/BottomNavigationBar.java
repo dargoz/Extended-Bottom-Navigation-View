@@ -28,6 +28,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import com.dargoz.extendedbottomnavigationview.menu.BaseMenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuOnClickListener;
+import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
 
 import java.util.Arrays;
 
@@ -88,7 +89,7 @@ public class BottomNavigationBar extends FrameLayout {
         Context context = getContext();
         Menu subMenu = new BottomNavigationMenu(context);
         this.getMenuInflater().inflate(menuResId, subMenu);
-
+        menuItemLayout = new SubMenuLayout(context);
         LinearLayout menuLayout = getMenuChildAt(indexRootMenu);
         LinearLayout subMenuContainer = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
@@ -99,7 +100,7 @@ public class BottomNavigationBar extends FrameLayout {
             drawable.setShape(GradientDrawable.RECTANGLE);
             drawable.setCornerRadius(10);
             drawable.setColor(getResources().getColor(R.color.default_sub_menu_background_color_state));
-        subMenuContainer.setBackground(drawable);    
+        subMenuContainer.setBackground(drawable);
         for (int index = 0 ; index < subMenu.size(); index++) {
             Log.i("DRG","index : " + index);
             LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
