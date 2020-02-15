@@ -71,7 +71,7 @@ public class BottomNavigationBar extends FrameLayout {
 
     @SuppressWarnings("unused")
     public void setMenuOnClickListener(MenuOnClickListener menuOnClickListener) {
-        if(menuItemLayout != null) {
+        if (menuItemLayout != null) {
             this.menuItemLayout.setOnMenuClickListener(menuOnClickListener);
         }
     }
@@ -96,13 +96,13 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
-            GradientDrawable drawable = new GradientDrawable();
-            drawable.setShape(GradientDrawable.RECTANGLE);
-            drawable.setCornerRadius(10);
-            drawable.setColor(getResources().getColor(R.color.default_sub_menu_background_color_state));
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(10);
+        drawable.setColor(getResources().getColor(R.color.default_sub_menu_background_color_state));
         subMenuContainer.setBackground(drawable);
-        for (int index = 0 ; index < subMenu.size(); index++) {
-            Log.i("DRG","index : " + index);
+        for (int index = 0; index < subMenu.size(); index++) {
+            Log.i("DRG", "index : " + index);
             LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
             subMenuContainer.addView(subMenuLayout);
         }
@@ -112,7 +112,7 @@ public class BottomNavigationBar extends FrameLayout {
         constraintSet.clone(bottomNavBaseContainer);
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
                 menuLayout.getId(), ConstraintSet.TOP,
-                getResources().getDimensionPixelSize(R.dimen.baseline_8dp));
+                getResources().getDimensionPixelSize(R.dimen.baseline_12dp));
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.START,
                 menuLayout.getId(), ConstraintSet.START, 0);
         constraintSet.applyTo(bottomNavBaseContainer);
@@ -177,7 +177,6 @@ public class BottomNavigationBar extends FrameLayout {
             bottomNavBaseContainer.addView(menuItemContainer);
         }
     }
-
 
 
     private void setMenuConstraints(Menu menu, ConstraintLayout bottomNavBaseContainer) {

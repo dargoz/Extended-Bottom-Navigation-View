@@ -31,10 +31,12 @@ public class SubMenuLayout extends BaseMenuLayout {
         menuItemContainer.setId(View.generateViewId());
         menuItemContainer.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        int margin = context.getResources().getDimensionPixelSize(R.dimen.baseline_8dp);
+        layoutParams.setMargins(0, 0, margin, 0);
         menuItemContainer.setLayoutParams(layoutParams);
 
         int padding = context.getResources().getDimensionPixelSize(R.dimen.baseline_15dp);
-        menuItemContainer.setPadding(0, padding, 0, padding);
+        menuItemContainer.setPadding(padding, padding, padding, padding);
         menuItemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
