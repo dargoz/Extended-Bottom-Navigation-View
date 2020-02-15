@@ -97,6 +97,8 @@ public class BottomNavigationBar extends FrameLayout {
             LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
             subMenuContainer.addView(subMenuLayout);
         }
+        bottomNavBaseContainer.addView(subMenuContainer);
+
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(bottomNavBaseContainer);
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
