@@ -1,4 +1,4 @@
-package com.dargoz.extendedbottomnavigationview;
+package com.dargoz.extendedbottomnavigationview.menu;
 
 import android.view.Menu;
 
