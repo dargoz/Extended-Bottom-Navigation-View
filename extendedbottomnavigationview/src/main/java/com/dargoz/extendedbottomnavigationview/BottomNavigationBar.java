@@ -3,6 +3,7 @@ package com.dargoz.extendedbottomnavigationview;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -28,6 +29,7 @@ import com.dargoz.extendedbottomnavigationview.menu.BaseMenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuOnClickListener;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
+import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
 import java.util.Arrays;
 
@@ -45,6 +47,7 @@ public class BottomNavigationBar extends FrameLayout {
 
     private Menu menu;
     private MenuLayout menuItemLayout;
+    private MenuLayout subMenuItemLayout;
     private MenuOnClickListener subMenuOnClickListener;
 
     private int currentSelectedItem;
@@ -79,7 +82,9 @@ public class BottomNavigationBar extends FrameLayout {
 
     @SuppressWarnings("unused")
     public void setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener) {
-        this.subMenuOnClickListener = subMenuOnClickListener;
+        if(subMenuItemLayout != null) {
+            subMenuItemLayout.setOnMenuClickListener(subMenuOnClickListener);
+        }
     }
 
     @SuppressWarnings("unused")
@@ -96,8 +101,7 @@ public class BottomNavigationBar extends FrameLayout {
         Context context = getContext();
         Menu subMenu = new BottomNavigationMenu(context);
         this.getMenuInflater().inflate(menuResId, subMenu);
-        menuItemLayout = new SubMenuLayout(context);
-        menuItemLayout.setOnMenuClickListener(subMenuOnClickListener);
+        subMenuItemLayout = new SubMenuLayout(context);
 
         LinearLayout menuLayout = getMenuChildAt(indexRootMenu);
         LinearLayout subMenuContainer = new LinearLayout(context);
@@ -105,14 +109,12 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(10);
-        drawable.setColor(getResources().getColor(R.color.default_sub_menu_background_color_state));
-        subMenuContainer.setBackground(drawable);
+
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i("DRG", "index : " + index);
             LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
+            Drawable drawable = ShapeFactory.createRoundedRectangle(context);
+            subMenuLayout.setBackground(drawable);
             subMenuContainer.addView(subMenuLayout);
         }
         bottomNavBaseContainer.addView(subMenuContainer);
