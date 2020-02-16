@@ -9,12 +9,11 @@ import com.dargoz.extendedbottomnavigationview.R;
 public class ShapeFactory {
     private ShapeFactory(){}
 
-    public static Drawable createRoundedRectangle(Context context) {
+    public static Drawable createRoundedRectangle(int color, float radius) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(context.getResources().getDimensionPixelSize(R.dimen.baseline_4dp));
-        drawable.setColor(context.getResources()
-                .getColor(R.color.default_sub_menu_background_color_state));
+        drawable.setCornerRadius(radius);
+        drawable.setColor(color);
         return drawable;
     }
 }

@@ -9,11 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 import com.dargoz.extendedbottomnavigationview.R;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class SubMenuLayout extends BaseMenuLayout {
 
     public SubMenuLayout(Context context) {

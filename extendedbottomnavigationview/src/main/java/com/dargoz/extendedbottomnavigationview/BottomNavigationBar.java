@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,7 +31,9 @@ import com.dargoz.extendedbottomnavigationview.menu.MenuOnClickListener;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
 import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -48,10 +50,10 @@ public class BottomNavigationBar extends FrameLayout {
     private Menu menu;
     private MenuLayout menuItemLayout;
     private MenuLayout subMenuItemLayout;
-    private MenuOnClickListener subMenuOnClickListener;
 
     private int currentSelectedItem;
     private int highlightMenuPosition = -1;
+    private SparseIntArray subMenuIds = new SparseIntArray();
 
     public BottomNavigationBar(@NonNull Context context) {
         super(context);
@@ -96,6 +98,16 @@ public class BottomNavigationBar extends FrameLayout {
         titleText.setSelected(true);
     }
 
+    public void showSubMenu(int position, boolean visibility) {
+        for(int i=0 ; i<bottomNavBaseContainer.getChildCount(); i++) {
+            View view = bottomNavBaseContainer.getChildAt(i);
+            if(view.getId() == subMenuIds.get(position, -1)) {
+                view.setVisibility(visibility ? VISIBLE : GONE);
+                break;
+            }
+        }
+    }
+
     @SuppressWarnings("unused")
     public void addSubMenu(int menuResId, int indexRootMenu) {
         Context context = getContext();
@@ -109,11 +121,14 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
-
+        subMenuIds.append(indexRootMenu,subMenuContainer.getId());
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i("DRG", "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
-            Drawable drawable = ShapeFactory.createRoundedRectangle(context);
+            Drawable drawable = ShapeFactory.createRoundedRectangle(
+                    getResources().getColor(R.color.default_sub_menu_background_color_state),
+                    getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
+            );
             subMenuLayout.setBackground(drawable);
             subMenuContainer.addView(subMenuLayout);
         }

@@ -3,12 +3,14 @@ package com.dargoz.extendedbottomnavigationview;
 import android.content.Context;
 import android.view.MenuItem;
 
+import androidx.annotation.RestrictTo;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuItemImpl;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class BottomNavigationMenu extends MenuBuilder {
     private static final int MAX_ITEM_COUNT = 5;
-    BottomNavigationMenu(Context context) {
+    public BottomNavigationMenu(Context context) {
         super(context);
     }
 
