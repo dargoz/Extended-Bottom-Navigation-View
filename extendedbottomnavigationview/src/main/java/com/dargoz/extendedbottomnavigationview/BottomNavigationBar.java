@@ -31,9 +31,7 @@ import com.dargoz.extendedbottomnavigationview.menu.MenuOnClickListener;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
 import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;

@@ -18,7 +18,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dargoz.extendedbottomnavigationview.R;
 
-import org.jetbrains.annotations.NotNull;
 
 import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -38,7 +37,7 @@ public class BaseMenuLayout implements MenuLayout {
     }
 
     @Override
-    public LinearLayout constructMenu(@NotNull final Menu menu, int itemIndex) {
+    public LinearLayout constructMenu(@NonNull final Menu menu, int itemIndex) {
         TextView titleText = constructTitleTextView(menu.getItem(itemIndex).getTitle().toString());
         ImageView imageView = constructIconImageView(menu.getItem(itemIndex).getIcon());
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
