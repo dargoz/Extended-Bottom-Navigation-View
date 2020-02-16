@@ -10,3 +10,9 @@ ChangeList
 
 - v 0.0.3
   - add sub menu implementation
+  
+- v 0.0.4
+  - fixing sub menu functionality
+  
+- v 0.0.5
+  - add show/hide sub menu method
