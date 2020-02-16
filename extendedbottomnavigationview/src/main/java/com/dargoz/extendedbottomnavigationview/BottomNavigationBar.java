@@ -112,7 +112,7 @@ public class BottomNavigationBar extends FrameLayout {
 
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i("DRG", "index : " + index);
-            LinearLayout subMenuLayout = menuItemLayout.constructMenu(subMenu, index);
+            LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
             Drawable drawable = ShapeFactory.createRoundedRectangle(context);
             subMenuLayout.setBackground(drawable);
             subMenuContainer.addView(subMenuLayout);

@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavBar.setMenuOnClickListener { menu, position ->
             Log.i("DRG", "menu : ${menu.getItem(position).title} :: pos : $position")
         }
-        /*bottomNavBar.setSubMenuOnClickListener { menu, position ->
+        bottomNavBar.setSubMenuOnClickListener { menu, position ->
             Log.i("DRG", "menu : ${menu.getItem(position).title} :: pos : $position")
-        }*/
+        }
     }
 }
