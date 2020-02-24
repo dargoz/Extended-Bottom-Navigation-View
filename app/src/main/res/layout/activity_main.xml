@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menuBackgroundColor="@color/colorAccent"
+        app:subMenuType="2"
+        app:subMenuBackgroundColor="@color/colorAccent"
         app:menu="@menu/bottom_navigation_menu_list"/>
 
 </RelativeLayout>

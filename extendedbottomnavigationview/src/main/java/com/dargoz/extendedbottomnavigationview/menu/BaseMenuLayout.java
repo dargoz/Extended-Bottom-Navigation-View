@@ -25,7 +25,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class BaseMenuLayout implements MenuLayout {
     MenuOnClickListener menuOnClickListener;
-    private Context context;
+    protected Context context;
 
     public BaseMenuLayout(Context context) {
         this.context = context;
@@ -42,10 +42,10 @@ public class BaseMenuLayout implements MenuLayout {
         ImageView imageView = constructIconImageView(menu.getItem(itemIndex).getIcon());
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
     }
-    private TextView constructTitleTextView(String text) {
+    protected TextView constructTitleTextView(String text) {
         TextView titleText = new TextView(context);
         LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, 0, (float) 0.3);
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0.3);
         titleParams.setMargins(
                 0, context.getResources().getDimensionPixelSize(R.dimen.baseline_2dp),
                 0, 0);

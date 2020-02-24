@@ -1,9 +1,12 @@
 package com.dargoz.extendedbottomnavigationview.menu;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,13 +16,16 @@ import androidx.annotation.RestrictTo;
 
 import com.dargoz.extendedbottomnavigationview.R;
 
+import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class SubMenuLayout extends BaseMenuLayout {
+    private SubMenuOrientation orientation;
 
-    public SubMenuLayout(Context context) {
+    public SubMenuLayout(Context context, SubMenuOrientation orientation) {
         super(context);
+        this.orientation = orientation;
     }
 
     @NonNull
@@ -27,7 +33,7 @@ public class SubMenuLayout extends BaseMenuLayout {
     protected LinearLayout buildMenuItemLayout(final Menu menu, Context context, TextView titleText,
                                                ImageView imageView, final int itemIndex) {
         LinearLayout menuItemContainer = new LinearLayout(context);
-        menuItemContainer.setOrientation(LinearLayout.VERTICAL);
+        menuItemContainer.setOrientation(orientation.getValue());
         menuItemContainer.addView(imageView);
         menuItemContainer.addView(titleText);
         menuItemContainer.setId(View.generateViewId());
@@ -48,5 +54,22 @@ public class SubMenuLayout extends BaseMenuLayout {
             }
         });
         return menuItemContainer;
+    }
+
+    @Override
+    protected TextView constructTitleTextView(String text) {
+        TextView titleText = new TextView(context);
+        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0.3);
+        titleParams.setMargins(
+                context.getResources().getDimensionPixelSize(R.dimen.baseline_4dp), 0,
+                0, 0);
+        titleText.setLayoutParams(titleParams);
+        titleText.setText(text);
+        titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
+        titleText.setTypeface(Typeface.DEFAULT_BOLD);
+        titleText.setSelected(false);
+        return titleText;
     }
 }

@@ -29,6 +29,7 @@ import com.dargoz.extendedbottomnavigationview.menu.BaseMenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.MenuOnClickListener;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
+import com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation;
 import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
 import java.util.Arrays;
@@ -36,6 +37,8 @@ import java.util.Arrays;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.dargoz.extendedbottomnavigationview.Constants.NULL_EXCEPTION_WORDING;
+import static com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation.HORIZONTAL;
+import static com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation.VERTICAL;
 
 
 public class BottomNavigationBar extends FrameLayout {
@@ -49,8 +52,10 @@ public class BottomNavigationBar extends FrameLayout {
     private MenuLayout menuItemLayout;
     private MenuLayout subMenuItemLayout;
 
-    private int currentSelectedItem;
+
     private int highlightMenuPosition = -1;
+    private int subMenuType = -1;
+    private int subMenuBackgroundColor = -1;
     private SparseIntArray subMenuIds = new SparseIntArray();
 
     public BottomNavigationBar(@NonNull Context context) {
@@ -107,28 +112,36 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     @SuppressWarnings("unused")
-    public void addSubMenu(int menuResId, int indexRootMenu) {
+    public void addSubMenu(int menuResId, int indexRootMenu, SubMenuOrientation orientation) {
         Context context = getContext();
         Menu subMenu = new BottomNavigationMenu(context);
         this.getMenuInflater().inflate(menuResId, subMenu);
-        subMenuItemLayout = new SubMenuLayout(context);
+        subMenuItemLayout = new SubMenuLayout(context, subMenuType == 1
+                ? VERTICAL : HORIZONTAL);
 
         LinearLayout menuLayout = getMenuChildAt(indexRootMenu);
         LinearLayout subMenuContainer = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
-        subMenuContainer.setOrientation(LinearLayout.HORIZONTAL);
+        subMenuContainer.setOrientation(orientation.getValue());
         subMenuIds.append(indexRootMenu,subMenuContainer.getId());
+        Drawable drawable = ShapeFactory.createRoundedRectangle(
+                getResources().getColor(subMenuBackgroundColor != -1
+                        ? subMenuBackgroundColor : R.color.default_sub_menu_background_color_state),
+                getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
+        );
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i("DRG", "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
-            Drawable drawable = ShapeFactory.createRoundedRectangle(
-                    getResources().getColor(R.color.default_sub_menu_background_color_state),
-                    getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
-            );
-            subMenuLayout.setBackground(drawable);
+
+            if(subMenuType == -1 || subMenuType == 1) {
+                subMenuLayout.setBackground(drawable);
+            }
             subMenuContainer.addView(subMenuLayout);
+        }
+        if(subMenuType == 2) {
+            subMenuContainer.setBackground(drawable);
         }
         bottomNavBaseContainer.addView(subMenuContainer);
 
@@ -168,6 +181,10 @@ public class BottomNavigationBar extends FrameLayout {
                 .getResourceId(R.styleable.BottomNavigationBar_menuItemTextColor, -1);
         highlightMenuPosition = tmpArrStyleAttributes
                 .getInt(R.styleable.BottomNavigationBar_highlightMenuPosition, -1);
+        subMenuType = tmpArrStyleAttributes
+                .getInt(R.styleable.BottomNavigationBar_subMenuType, -1);
+        subMenuBackgroundColor = tmpArrStyleAttributes
+                .getResourceId(R.styleable.BottomNavigationBar_subMenuBackgroundColor, -1);
         Log.i("DRG", "menuResId : " + menuResId);
         this.getMenuInflater().inflate(menuResId, this.menu);
         for (int i = 0; i < menu.size(); i++) {
@@ -305,9 +322,11 @@ public class BottomNavigationBar extends FrameLayout {
     public void setSelectedMenuItem(int itemIndex) {
         if (itemIndex != highlightMenuPosition) {
             try {
-                setMenuSelected(currentSelectedItem, false);
+                for(int pos = 0 ; pos < menu.size(); pos++) {
+                    setMenuSelected(pos, false);
+                }
                 setMenuSelected(itemIndex, true);
-                currentSelectedItem = itemIndex;
+
             } catch (Exception e) {
                 Log.w(TAG, "Exception on setSelectedMenuItem " + e.getMessage());
             }

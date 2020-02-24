@@ -6,5 +6,7 @@
         <attr name="menuItemTextColor" format="integer|color"/>
         <attr name="highlightMenuPosition" format="integer"/>
         <attr name="subMenu" format="reference"/>
+        <attr name="subMenuType" format="integer"/>
+        <attr name="subMenuBackgroundColor" format="integer|color"/>
     </declare-styleable>
 </resources>
