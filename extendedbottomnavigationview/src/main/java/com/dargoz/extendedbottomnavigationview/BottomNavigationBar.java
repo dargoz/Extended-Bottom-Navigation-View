@@ -1,5 +1,6 @@
 package com.dargoz.extendedbottomnavigationview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -32,6 +33,9 @@ import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation;
 import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -52,10 +56,10 @@ public class BottomNavigationBar extends FrameLayout {
     private MenuLayout menuItemLayout;
     private MenuLayout subMenuItemLayout;
 
-
     private int highlightMenuPosition = -1;
     private int subMenuType = -1;
     private int subMenuBackgroundColor = -1;
+    private int subMenuTextColor = -1;
     private SparseIntArray subMenuIds = new SparseIntArray();
 
     public BottomNavigationBar(@NonNull Context context) {
@@ -83,6 +87,23 @@ public class BottomNavigationBar extends FrameLayout {
         if (menuItemLayout != null) {
             this.menuItemLayout.setOnMenuClickListener(menuOnClickListener);
         }
+    }
+
+    public void setSubMenuTextColor(int colorResId) {
+        ColorStateList colorStateList = getResources().getColorStateList(colorResId == -1 ?
+                R.color.default_color_state : colorResId);
+        for(int i=0; i < bottomNavBaseContainer.getChildCount(); i++) {
+            if(bottomNavBaseContainer.getChildAt(i).getId() == subMenuIds.get(1)) {
+                LinearLayout subMenuContainer = (LinearLayout) bottomNavBaseContainer.getChildAt(i);
+                int countSubMenuItem = subMenuContainer.getChildCount();
+                for(int position = 0; position < countSubMenuItem; position++) {
+                    LinearLayout subMenuItemLinearLayout = (LinearLayout) subMenuContainer.getChildAt(position);
+                    TextView titleText = (TextView) subMenuItemLinearLayout.getChildAt(1);
+                    titleText.setTextColor(colorStateList);
+                }
+            }
+        }
+
     }
 
     @SuppressWarnings("unused")
@@ -149,7 +170,7 @@ public class BottomNavigationBar extends FrameLayout {
         constraintSet.clone(bottomNavBaseContainer);
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
                 menuLayout.getId(), ConstraintSet.TOP,
-                getResources().getDimensionPixelSize(R.dimen.baseline_12dp));
+                getResources().getDimensionPixelSize(R.dimen.baseline_18dp));
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.START,
                 menuLayout.getId(), ConstraintSet.START, 0);
         constraintSet.applyTo(bottomNavBaseContainer);
@@ -182,9 +203,11 @@ public class BottomNavigationBar extends FrameLayout {
         highlightMenuPosition = tmpArrStyleAttributes
                 .getInt(R.styleable.BottomNavigationBar_highlightMenuPosition, -1);
         subMenuType = tmpArrStyleAttributes
-                .getInt(R.styleable.BottomNavigationBar_subMenuType, -1);
+                .getInt(R.styleable.BottomNavigationBar_subMenuType, 1);
         subMenuBackgroundColor = tmpArrStyleAttributes
                 .getResourceId(R.styleable.BottomNavigationBar_subMenuBackgroundColor, -1);
+        subMenuTextColor = tmpArrStyleAttributes
+                .getResourceId(R.styleable.BottomNavigationBar_subMenuTextColor, -1);
         Log.i("DRG", "menuResId : " + menuResId);
         this.getMenuInflater().inflate(menuResId, this.menu);
         for (int i = 0; i < menu.size(); i++) {
@@ -197,6 +220,7 @@ public class BottomNavigationBar extends FrameLayout {
         setSelectedMenuItem(0);
     }
 
+    @SuppressLint("RestrictedApi")
     private MenuInflater getMenuInflater() {
         if (this.menuInflater == null) {
             this.menuInflater = new SupportMenuInflater(this.getContext());

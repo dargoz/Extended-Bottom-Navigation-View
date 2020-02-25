@@ -8,5 +8,6 @@
         <attr name="subMenu" format="reference"/>
         <attr name="subMenuType" format="integer"/>
         <attr name="subMenuBackgroundColor" format="integer|color"/>
+        <attr name="subMenuTextColor" format="integer|color"/>
     </declare-styleable>
 </resources>

@@ -21,5 +21,8 @@ ChangeList
   - add custom subMenu Background color from xml (programmatically coming soon)
   - add subMenu param for vertical/horizontal style
   - add subMenu type :
-    - 1: full background with text on the right icon. 
+    - 1: full background with text on the right icon.
     - 2: background per item with text below icon.
+
+- v 0.0.7
+  - add custom sub menu text color
