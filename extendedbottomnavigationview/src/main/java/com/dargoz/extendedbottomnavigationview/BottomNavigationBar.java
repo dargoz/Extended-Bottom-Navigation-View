@@ -168,7 +168,7 @@ public class BottomNavigationBar extends FrameLayout {
         constraintSet.clone(bottomNavBaseContainer);
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
                 menuLayout.getId(), ConstraintSet.TOP,
-                getResources().getDimensionPixelSize(R.dimen.baseline_18dp));
+                getResources().getDimensionPixelSize(R.dimen.baseline_22dp));
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.START,
                 menuLayout.getId(), ConstraintSet.START, 0);
         constraintSet.applyTo(bottomNavBaseContainer);
