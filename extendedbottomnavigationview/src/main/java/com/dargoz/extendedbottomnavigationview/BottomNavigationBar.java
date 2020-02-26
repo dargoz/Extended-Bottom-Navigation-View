@@ -33,9 +33,6 @@ import com.dargoz.extendedbottomnavigationview.menu.SubMenuLayout;
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation;
 import com.dargoz.extendedbottomnavigationview.shape.ShapeFactory;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -47,6 +44,7 @@ import static com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation.VE
 
 public class BottomNavigationBar extends FrameLayout {
     private final String TAG = this.getClass().getSimpleName();
+    public static final int SELECTED_NONE = -9;
     private View rootView;
     private MenuInflater menuInflater;
     ConstraintLayout bottomNavBaseContainer;
@@ -153,7 +151,7 @@ public class BottomNavigationBar extends FrameLayout {
                 getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
         );
         for (int index = 0; index < subMenu.size(); index++) {
-            Log.i("DRG", "index : " + index);
+            Log.i(TAG, "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
 
             if(subMenuType == -1 || subMenuType == 1) {
@@ -208,11 +206,11 @@ public class BottomNavigationBar extends FrameLayout {
                 .getResourceId(R.styleable.BottomNavigationBar_subMenuBackgroundColor, -1);
         subMenuTextColor = tmpArrStyleAttributes
                 .getResourceId(R.styleable.BottomNavigationBar_subMenuTextColor, -1);
-        Log.i("DRG", "menuResId : " + menuResId);
+        Log.i(TAG, "menuResId : " + menuResId);
         this.getMenuInflater().inflate(menuResId, this.menu);
         for (int i = 0; i < menu.size(); i++) {
 
-            Log.i("DRG", "get bottom_nav_menu title : " + menu.getItem(i).getTitle());
+            Log.i(TAG, "get bottom_nav_menu title : " + menu.getItem(i).getTitle());
         }
         buildMenu(menu, context);
         setMenuBackground(menuBackgroundColor);
@@ -262,11 +260,11 @@ public class BottomNavigationBar extends FrameLayout {
             constraintSet.clone(bottomNavBaseContainer);
             View menuItemContainer = bottomNavBaseContainer.getChildAt(menuIndex);
             viewIds[menuIndex] = menuItemContainer.getId();
-            Log.d("DRG", "current id : " + menuItemContainer.getId());
+            Log.d(TAG, "current id : " + menuItemContainer.getId());
             int id = previousItem != null ? previousItem.getId() : -1;
 
-            Log.d("DRG", "prev id : " + id);
-            Log.w("DRG", " ===================== ");
+            Log.d(TAG, "prev id : " + id);
+            Log.w(TAG, " ===================== ");
 
             if (previousItem != null) {
                 constraintSet.connect(
@@ -293,7 +291,7 @@ public class BottomNavigationBar extends FrameLayout {
 
         }
 
-        Log.v("DRG", "view Ids : " + Arrays.toString(viewIds));
+        Log.v(TAG, "view Ids : " + Arrays.toString(viewIds));
 
 
         constraintSet.createHorizontalChain(
@@ -344,12 +342,13 @@ public class BottomNavigationBar extends FrameLayout {
     }
 
     public void setSelectedMenuItem(int itemIndex) {
+        Log.d(TAG,"set selected menu : " + itemIndex + " :: " + highlightMenuPosition);
         if (itemIndex != highlightMenuPosition) {
             try {
                 for(int pos = 0 ; pos < menu.size(); pos++) {
                     setMenuSelected(pos, false);
                 }
-                setMenuSelected(itemIndex, true);
+                if (itemIndex != SELECTED_NONE) setMenuSelected(itemIndex, true);
 
             } catch (Exception e) {
                 Log.w(TAG, "Exception on setSelectedMenuItem " + e.getMessage());

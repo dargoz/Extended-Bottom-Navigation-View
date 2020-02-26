@@ -26,3 +26,7 @@ ChangeList
 
 - v 0.0.7
   - add custom sub menu text color
+  
+- v 0.0.8
+  - add SELECTED_NONE for bottom navigation
+  - disable multitouch on bottom navigation bar
