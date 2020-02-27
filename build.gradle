@@ -1,0 +1,36 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.61'
+    repositories {
+        maven { url 'http://10.4.203.28:8081/artifactory/list/RepositoryDevOps/' }
+        maven { url 'http://bcaartifactory:8080/artifactory/list/jcenter.bintray.com/' }
+        maven { url 'http://bcaartifactory:8080/artifactory/list/maven.google.com/' }
+        maven { url 'http://bcaartifactory:8080/artifactory/list/jitpack.io/' }
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://10.4.203.28:8081/artifactory/list/RepositoryDevOps/' }
+        maven { url 'http://bcaartifactory:8080/artifactory/list/jcenter.bintray.com/' }
+        maven { url 'http://bcaartifactory:8080/artifactory/list/maven.google.com/' }
+        maven {
+            url 'http://bcaartifactory:8080/artifactory/list/jitpack.io/'
+            content{
+                includeGroup "com.github.dargoz"
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

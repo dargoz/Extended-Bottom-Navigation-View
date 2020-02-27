@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <declare-styleable name="BottomNavigationBar">
+        <attr name="menu" format="reference"/>
+        <attr name="menuBackgroundColor" format="integer|color"/>
+        <attr name="menuItemTextColor" format="integer|color"/>
+        <attr name="highlightMenuPosition" format="integer"/>
+        <attr name="subMenu" format="reference"/>
+        <attr name="subMenuType" format="integer"/>
+        <attr name="subMenuBackgroundColor" format="integer|color"/>
+        <attr name="subMenuTextColor" format="integer|color"/>
+    </declare-styleable>
+</resources>
