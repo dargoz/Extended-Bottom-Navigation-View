@@ -346,7 +346,7 @@ public class BottomNavigationBar extends FrameLayout {
         if (itemIndex != highlightMenuPosition) {
             try {
                 for(int pos = 0 ; pos < menu.size(); pos++) {
-                    setMenuSelected(pos, false);
+                    setMenuSelected(pos, pos == highlightMenuPosition);
                 }
                 if (itemIndex != SELECTED_NONE) setMenuSelected(itemIndex, true);
 

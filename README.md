@@ -30,3 +30,6 @@ ChangeList
 - v 0.0.8
   - add SELECTED_NONE for bottom navigation
   - disable multitouch on bottom navigation bar
+  
+- v 0.0.9
+  - fixing error logic for highlight menu shouldn't be changed on setSelectedMenuItem()
