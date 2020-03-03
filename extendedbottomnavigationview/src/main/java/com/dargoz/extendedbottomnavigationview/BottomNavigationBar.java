@@ -56,7 +56,7 @@ public class BottomNavigationBar extends FrameLayout {
 
     private int highlightMenuPosition = -1;
     private int subMenuType = -1;
-    private int subMenuBackgroundColor = -1;
+    private int subMenuBackground = -1;
     private int subMenuTextColor = -1;
     private SparseIntArray subMenuIds = new SparseIntArray();
 
@@ -145,22 +145,36 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(orientation.getValue());
         subMenuIds.append(indexRootMenu,subMenuContainer.getId());
-        Drawable drawable = ShapeFactory.createRoundedRectangle(
-                getResources().getColor(subMenuBackgroundColor != -1
-                        ? subMenuBackgroundColor : R.color.default_sub_menu_background_color_state),
-                getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
-        );
+        Drawable drawable = null;
+        try {
+            drawable = ShapeFactory.createRoundedRectangle(
+                    getResources().getColor(subMenuBackground != -1
+                            ? subMenuBackground : R.color.default_sub_menu_background_color_state),
+                    getResources().getDimensionPixelSize(R.dimen.baseline_4dp)
+            );
+        } catch (Exception e) {
+            Log.d("DRG","exception resource : " + e.getMessage());
+        }
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i(TAG, "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
 
             if(subMenuType == -1 || subMenuType == 1) {
-                subMenuLayout.setBackground(drawable);
+                if(drawable == null) {
+                    subMenuLayout.setBackgroundResource(subMenuBackground);
+                } else {
+                    subMenuLayout.setBackground(drawable);
+                }
+
             }
             subMenuContainer.addView(subMenuLayout);
         }
         if(subMenuType == 2) {
-            subMenuContainer.setBackground(drawable);
+            if(drawable == null) {
+                subMenuContainer.setBackgroundResource(subMenuBackground);
+            } else {
+                subMenuContainer.setBackground(drawable);
+            }
         }
         bottomNavBaseContainer.addView(subMenuContainer);
 
@@ -202,8 +216,8 @@ public class BottomNavigationBar extends FrameLayout {
                 .getInt(R.styleable.BottomNavigationBar_highlightMenuPosition, -1);
         subMenuType = tmpArrStyleAttributes
                 .getInt(R.styleable.BottomNavigationBar_subMenuType, 1);
-        subMenuBackgroundColor = tmpArrStyleAttributes
-                .getResourceId(R.styleable.BottomNavigationBar_subMenuBackgroundColor, -1);
+        subMenuBackground = tmpArrStyleAttributes
+                .getResourceId(R.styleable.BottomNavigationBar_subMenuBackground, -1);
         subMenuTextColor = tmpArrStyleAttributes
                 .getResourceId(R.styleable.BottomNavigationBar_subMenuTextColor, -1);
         Log.i(TAG, "menuResId : " + menuResId);

@@ -33,3 +33,7 @@ ChangeList
   
 - v 0.0.9
   - fixing error logic for highlight menu shouldn't be changed on setSelectedMenuItem()
+  
+- v 0.1.0
+  - change subMenuBackgroundColor attribute name to subMenuBackground
+  - make subMenuBackground support drawable resource
