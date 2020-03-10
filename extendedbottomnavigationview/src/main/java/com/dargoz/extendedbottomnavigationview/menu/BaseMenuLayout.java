@@ -52,7 +52,7 @@ public class BaseMenuLayout implements MenuLayout {
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
         titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, context.getResources().getDimensionPixelSize(R.dimen.font_size));
         titleText.setTypeface(Typeface.DEFAULT_BOLD);
         titleText.setSelected(false);
         return titleText;

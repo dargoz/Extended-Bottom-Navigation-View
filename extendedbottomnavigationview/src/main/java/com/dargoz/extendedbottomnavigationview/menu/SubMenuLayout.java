@@ -17,6 +17,7 @@ import androidx.annotation.RestrictTo;
 import com.dargoz.extendedbottomnavigationview.R;
 
 import static android.view.View.TEXT_ALIGNMENT_CENTER;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
@@ -38,7 +39,7 @@ public class SubMenuLayout extends BaseMenuLayout {
         menuItemContainer.addView(titleText);
         menuItemContainer.setId(View.generateViewId());
         menuItemContainer.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
         int margin = context.getResources().getDimensionPixelSize(R.dimen.baseline_8dp);
         layoutParams.setMargins(0, 0, margin, 0);
         menuItemContainer.setLayoutParams(layoutParams);
