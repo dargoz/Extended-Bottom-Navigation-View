@@ -44,3 +44,6 @@ ChangeList
   
 - v 0.1.2
   - add get menuBackground View object so we can't connect it using constraint from view outside the library
+  
+- v 0.1.3
+  - give access to bottom nav menu item view.
