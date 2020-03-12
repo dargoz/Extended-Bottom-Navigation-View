@@ -382,7 +382,7 @@ public class BottomNavigationBar extends FrameLayout {
         titleText.setSelected(flagSelected);
     }
 
-    private LinearLayout getMenuChildAt(int itemIndex) {
+    public LinearLayout getMenuChildAt(int itemIndex) {
         try {
             return (LinearLayout) bottomNavBaseContainer.getChildAt(itemIndex + 1);
         } catch (Exception e) {
