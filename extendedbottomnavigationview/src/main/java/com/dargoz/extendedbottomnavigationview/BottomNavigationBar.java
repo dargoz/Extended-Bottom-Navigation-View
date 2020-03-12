@@ -75,6 +75,10 @@ public class BottomNavigationBar extends FrameLayout {
         init(context, attrs);
     }
 
+    public ImageView getMenuBackground() {
+        return menuBackground;
+    }
+
     @SuppressWarnings("unused")
     public Menu getMenu() {
         return menu;

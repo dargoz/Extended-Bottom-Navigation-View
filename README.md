@@ -37,3 +37,10 @@ ChangeList
 - v 0.1.0
   - change subMenuBackgroundColor attribute name to subMenuBackground
   - make subMenuBackground support drawable resource
+  
+- v 0.1.1
+  - fix click area on sub menu
+  - hardcoded font size for main bottom nav menu
+  
+- v 0.1.2
+  - add get menuBackground View object so we can't connect it using constraint from view outside the library
