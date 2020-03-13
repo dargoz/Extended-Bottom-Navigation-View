@@ -59,6 +59,7 @@ public class BottomNavigationBar extends FrameLayout {
     private int subMenuBackground = -1;
     private int subMenuTextColor = -1;
     private SparseIntArray subMenuIds = new SparseIntArray();
+    private SparseIntArray imageIconIds = new SparseIntArray();
 
     public BottomNavigationBar(@NonNull Context context) {
         super(context);
@@ -255,6 +256,7 @@ public class BottomNavigationBar extends FrameLayout {
 
         for (int itemIndex = 0; itemIndex < menu.size(); itemIndex++) {
             LinearLayout menuItemContainer = menuItemLayout.constructMenu(menu, itemIndex);
+            imageIconIds = ((BaseMenuLayout)menuItemLayout).getImageIconIds();
             bottomNavBaseContainer.addView(menuItemContainer);
         }
     }
@@ -376,7 +378,8 @@ public class BottomNavigationBar extends FrameLayout {
 
     private void setMenuSelected(int itemIndex, boolean flagSelected) {
         LinearLayout menuLayout = getMenuChildAt(itemIndex);
-        ImageView imageIcon = (ImageView) menuLayout.getChildAt(0);
+        int imageId = imageIconIds.get(itemIndex,-1);
+        ImageView imageIcon = menuLayout.findViewById(imageId);
         TextView titleText = (TextView) menuLayout.getChildAt(1);
         imageIcon.setSelected(flagSelected);
         titleText.setSelected(flagSelected);

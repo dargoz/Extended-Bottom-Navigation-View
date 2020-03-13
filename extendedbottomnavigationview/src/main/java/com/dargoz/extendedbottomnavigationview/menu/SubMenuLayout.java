@@ -16,7 +16,6 @@ import androidx.annotation.RestrictTo;
 
 import com.dargoz.extendedbottomnavigationview.R;
 
-import static android.view.View.TEXT_ALIGNMENT_CENTER;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -67,7 +66,7 @@ public class SubMenuLayout extends BaseMenuLayout {
                 0, 0);
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
-        titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+        titleText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
         titleText.setTypeface(Typeface.DEFAULT_BOLD);
         titleText.setSelected(false);

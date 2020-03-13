@@ -47,3 +47,11 @@ ChangeList
   
 - v 0.1.3
   - give access to bottom nav menu item view.
+  
+- v 0.1.4
+  - fix add external view caused imageIcon cannot on state selected.
+    Caused :
+    selected wrong View after add external view to Menu Container (ex: add a badgeView icon), so setSelected run on wrong view .
+    
+    Solution :
+    change algorithm selection by ViewId

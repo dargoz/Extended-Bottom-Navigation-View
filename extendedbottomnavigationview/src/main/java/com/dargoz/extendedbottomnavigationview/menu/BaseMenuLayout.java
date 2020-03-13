@@ -3,6 +3,7 @@ package com.dargoz.extendedbottomnavigationview.menu;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -25,7 +26,12 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class BaseMenuLayout implements MenuLayout {
     MenuOnClickListener menuOnClickListener;
-    protected Context context;
+    private SparseIntArray imageIconIds = new SparseIntArray();
+    Context context;
+
+    public SparseIntArray getImageIconIds() {
+        return imageIconIds;
+    }
 
     public BaseMenuLayout(Context context) {
         this.context = context;
@@ -40,6 +46,7 @@ public class BaseMenuLayout implements MenuLayout {
     public LinearLayout constructMenu(@NonNull final Menu menu, int itemIndex) {
         TextView titleText = constructTitleTextView(menu.getItem(itemIndex).getTitle().toString());
         ImageView imageView = constructIconImageView(menu.getItem(itemIndex).getIcon());
+        imageIconIds.append(itemIndex, imageView.getId());
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
     }
     protected TextView constructTitleTextView(String text) {
@@ -64,6 +71,7 @@ public class BaseMenuLayout implements MenuLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT, WRAP_CONTENT);
         imageView.setLayoutParams(imageParams);
         imageView.setImageDrawable(drawable);
+        imageView.setId(View.generateViewId());
         imageView.setSelected(false);
         return imageView;
     }
