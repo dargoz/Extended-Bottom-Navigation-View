@@ -64,3 +64,6 @@ ChangeList
   
 - v 0.1.7
   - add Gravity CENTER_VERTICAL to subMenu Content
+  
+- v 0.1.8
+  - add xlarge dimen
