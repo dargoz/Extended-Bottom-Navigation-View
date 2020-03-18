@@ -1,4 +1,4 @@
 <resources>
     <dimen name="font_size">10dp</dimen>
-    <dimen name="bottom_nav_padding">12 dp</dimen>
+    <dimen name="bottom_nav_padding">12dp</dimen>
 </resources>
