@@ -58,3 +58,9 @@ ChangeList
     
 - v 0.1.5
   - adjustment dimen fot bottom navigation text and height size on small device
+  
+- v 0.1.6
+  - fixing error dimen resource file
+  
+- v 0.1.7
+  - add Gravity CENTER_VERTICAL to subMenu Content
