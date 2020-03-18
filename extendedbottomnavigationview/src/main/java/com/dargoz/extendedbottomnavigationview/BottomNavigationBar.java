@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -149,6 +150,7 @@ public class BottomNavigationBar extends FrameLayout {
         subMenuContainer.setLayoutParams(params);
         subMenuContainer.setId(View.generateViewId());
         subMenuContainer.setOrientation(orientation.getValue());
+        subMenuContainer.setGravity(Gravity.CENTER_VERTICAL );
         subMenuIds.append(indexRootMenu,subMenuContainer.getId());
         Drawable drawable = null;
         try {
