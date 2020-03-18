@@ -55,3 +55,6 @@ ChangeList
     
     Solution :
     change algorithm selection by ViewId
+    
+- v 0.1.5
+  - adjustment dimen fot bottom navigation text and height size on small device
