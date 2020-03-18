@@ -43,7 +43,7 @@ public class SubMenuLayout extends BaseMenuLayout {
         layoutParams.setMargins(0, 0, margin, 0);
         menuItemContainer.setLayoutParams(layoutParams);
 
-        int padding = context.getResources().getDimensionPixelSize(R.dimen.baseline_15dp);
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.bottom_nav_padding);
         menuItemContainer.setPadding(padding, padding, padding, padding);
         menuItemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class SubMenuLayout extends BaseMenuLayout {
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
         titleText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, context.getResources().getDimensionPixelSize(R.dimen.font_size));
         titleText.setTypeface(Typeface.DEFAULT_BOLD);
         titleText.setSelected(false);
         return titleText;

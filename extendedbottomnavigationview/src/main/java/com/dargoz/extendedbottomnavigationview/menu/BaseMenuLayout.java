@@ -89,7 +89,7 @@ public class BaseMenuLayout implements MenuLayout {
                 .LayoutParams(0, WRAP_CONTENT);
         menuItemContainer.setLayoutParams(layoutParams);
 
-        int padding = context.getResources().getDimensionPixelSize(R.dimen.baseline_15dp);
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.bottom_nav_padding);
         menuItemContainer.setPadding(0, padding, 0, padding);
         menuItemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
