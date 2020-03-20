@@ -67,3 +67,6 @@ ChangeList
   
 - v 0.1.8
   - add xlarge dimen
+  
+- v 0.1.9
+  - add small screen adjustment
