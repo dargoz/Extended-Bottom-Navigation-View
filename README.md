@@ -70,3 +70,6 @@ ChangeList
   
 - v 0.1.9
   - add small screen adjustment
+  
+- v 0.2.0
+  - adjust highlight dimen size
