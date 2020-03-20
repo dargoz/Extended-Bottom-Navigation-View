@@ -122,7 +122,7 @@ public class BottomNavigationBar extends FrameLayout {
         this.highlightMenuPosition = position;
         LinearLayout menuLayout = getMenuChildAt(position);
         TextView titleText = (TextView) menuLayout.getChildAt(1);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 32);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, getResources().getDimensionPixelSize(R.dimen.highlight_text_size));
         titleText.setSelected(true);
     }
 
