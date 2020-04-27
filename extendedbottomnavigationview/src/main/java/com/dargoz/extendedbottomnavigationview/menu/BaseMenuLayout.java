@@ -46,6 +46,7 @@ public class BaseMenuLayout implements MenuLayout {
     public LinearLayout constructMenu(@NonNull final Menu menu, int itemIndex) {
         TextView titleText = constructTitleTextView(menu.getItem(itemIndex).getTitle().toString());
         ImageView imageView = constructIconImageView(menu.getItem(itemIndex).getIcon());
+        imageView.setContentDescription("BottomNav Icon - " + menu.getItem(itemIndex).getTitle().toString());
         imageIconIds.append(itemIndex, imageView.getId());
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
     }
@@ -58,6 +59,7 @@ public class BaseMenuLayout implements MenuLayout {
                 0, 0);
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
+        titleText.setContentDescription("BottomNav Icon - " + text);
         titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         titleText.setTextSize(TypedValue.DENSITY_DEFAULT, context.getResources().getDimensionPixelSize(R.dimen.font_size));
         titleText.setTypeface(Typeface.DEFAULT_BOLD);

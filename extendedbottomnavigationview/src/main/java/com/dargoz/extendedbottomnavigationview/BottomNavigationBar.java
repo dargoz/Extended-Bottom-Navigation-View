@@ -165,7 +165,7 @@ public class BottomNavigationBar extends FrameLayout {
         for (int index = 0; index < subMenu.size(); index++) {
             Log.i(TAG, "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
-
+            subMenuLayout.setContentDescription("BottomNav SubMenu - " + subMenu.getItem(index).getTitle());
             if(subMenuType == -1 || subMenuType == 1) {
                 if(drawable == null) {
                     subMenuLayout.setBackgroundResource(subMenuBackground);
@@ -258,6 +258,7 @@ public class BottomNavigationBar extends FrameLayout {
 
         for (int itemIndex = 0; itemIndex < menu.size(); itemIndex++) {
             LinearLayout menuItemContainer = menuItemLayout.constructMenu(menu, itemIndex);
+            menuItemContainer.setContentDescription("BottomNav Icon - " + menu.getItem(itemIndex).getTitle());
             imageIconIds = ((BaseMenuLayout)menuItemLayout).getImageIconIds();
             bottomNavBaseContainer.addView(menuItemContainer);
         }

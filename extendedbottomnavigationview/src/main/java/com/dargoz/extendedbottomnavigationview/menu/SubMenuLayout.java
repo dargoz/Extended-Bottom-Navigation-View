@@ -66,6 +66,7 @@ public class SubMenuLayout extends BaseMenuLayout {
                 0, 0);
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
+        titleText.setContentDescription("BottomNav SubMenu - " + text);
         titleText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         titleText.setTextSize(TypedValue.DENSITY_DEFAULT, context.getResources().getDimensionPixelSize(R.dimen.font_size));
         titleText.setTypeface(Typeface.DEFAULT_BOLD);

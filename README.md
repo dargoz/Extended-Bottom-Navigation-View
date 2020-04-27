@@ -73,3 +73,6 @@ ChangeList
   
 - v 0.2.0
   - adjust highlight dimen size
+  
+ - v 0.3.0
+   - add content Description
