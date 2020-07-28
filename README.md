@@ -1,6 +1,7 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![](https://jitpack.io/v/dargoz/Extended-Bottom-Navigation-View.svg)](https://jitpack.io/#dargoz/Extended-Bottom-Navigation-View)
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+
 
 # Extended-Bottom-Navigation-View
 Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.<br>
