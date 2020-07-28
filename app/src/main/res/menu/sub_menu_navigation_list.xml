@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="@string/transaction_title_text"
-        android:icon="@drawable/icon_credit"
+        android:title="@string/setting_title_text"
+        android:icon="@drawable/icon_setting"
         />
     <item
-        android:title="@string/transaction_title_text"
-        android:icon="@drawable/icon_credit"
-        />
-    <item
-        android:title="@string/transaction_title_text"
-        android:icon="@drawable/icon_credit"
+        android:title="@string/history_title_text"
+        android:icon="@drawable/icon_history"
         />
 </menu>

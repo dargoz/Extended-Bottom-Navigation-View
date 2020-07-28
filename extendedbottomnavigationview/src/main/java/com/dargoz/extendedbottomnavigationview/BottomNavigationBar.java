@@ -59,6 +59,7 @@ public class BottomNavigationBar extends FrameLayout {
     private int subMenuType = -1;
     private int subMenuBackground = -1;
     private int subMenuTextColor = -1;
+
     private SparseIntArray subMenuIds = new SparseIntArray();
     private SparseIntArray imageIconIds = new SparseIntArray();
 
@@ -190,8 +191,11 @@ public class BottomNavigationBar extends FrameLayout {
         constraintSet.connect(subMenuContainer.getId(), ConstraintSet.BOTTOM,
                 menuLayout.getId(), ConstraintSet.TOP,
                 getResources().getDimensionPixelSize(R.dimen.baseline_22dp));
-        constraintSet.connect(subMenuContainer.getId(), ConstraintSet.START,
-                menuLayout.getId(), ConstraintSet.START, 0);
+
+        constraintSet.connect(subMenuContainer.getId(),
+                indexRootMenu > 2 ? ConstraintSet.END : ConstraintSet.START,
+                menuLayout.getId(),
+                indexRootMenu > 2 ? ConstraintSet.END : ConstraintSet.START, 0);
         constraintSet.applyTo(bottomNavBaseContainer);
     }
 

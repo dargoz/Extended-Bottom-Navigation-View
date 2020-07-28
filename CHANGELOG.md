@@ -71,5 +71,8 @@ Release tag notes:
 - v 0.2.0
   - adjust highlight dimen size
   
- - v 0.3.0
-   - add content Description
+- v 0.3.0
+  - add content Description
+
+- v 0.4.0
+  - enhance subMenu constraint validation on right corner

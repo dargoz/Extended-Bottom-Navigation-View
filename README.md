@@ -5,6 +5,7 @@
 # Extended-Bottom-Navigation-View
 Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.
 
+
 # Usage
 supported attributes with default values:
 ```xml
