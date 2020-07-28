@@ -3,6 +3,7 @@ package com.dargoz.extendedbottomnavigationview.menu;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -25,7 +26,12 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class BaseMenuLayout implements MenuLayout {
     MenuOnClickListener menuOnClickListener;
-    protected Context context;
+    private SparseIntArray imageIconIds = new SparseIntArray();
+    Context context;
+
+    public SparseIntArray getImageIconIds() {
+        return imageIconIds;
+    }
 
     public BaseMenuLayout(Context context) {
         this.context = context;
@@ -40,6 +46,8 @@ public class BaseMenuLayout implements MenuLayout {
     public LinearLayout constructMenu(@NonNull final Menu menu, int itemIndex) {
         TextView titleText = constructTitleTextView(menu.getItem(itemIndex).getTitle().toString());
         ImageView imageView = constructIconImageView(menu.getItem(itemIndex).getIcon());
+        imageView.setContentDescription("BottomNav Icon - " + menu.getItem(itemIndex).getTitle().toString());
+        imageIconIds.append(itemIndex, imageView.getId());
         return buildMenuItemLayout(menu, context, titleText, imageView, itemIndex);
     }
     protected TextView constructTitleTextView(String text) {
@@ -51,8 +59,9 @@ public class BaseMenuLayout implements MenuLayout {
                 0, 0);
         titleText.setLayoutParams(titleParams);
         titleText.setText(text);
+        titleText.setContentDescription("BottomNav Icon - " + text);
         titleText.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, 26);
+        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, context.getResources().getDimensionPixelSize(R.dimen.font_size));
         titleText.setTypeface(Typeface.DEFAULT_BOLD);
         titleText.setSelected(false);
         return titleText;
@@ -64,6 +73,7 @@ public class BaseMenuLayout implements MenuLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT, WRAP_CONTENT);
         imageView.setLayoutParams(imageParams);
         imageView.setImageDrawable(drawable);
+        imageView.setId(View.generateViewId());
         imageView.setSelected(false);
         return imageView;
     }
@@ -81,7 +91,7 @@ public class BaseMenuLayout implements MenuLayout {
                 .LayoutParams(0, WRAP_CONTENT);
         menuItemContainer.setLayoutParams(layoutParams);
 
-        int padding = context.getResources().getDimensionPixelSize(R.dimen.baseline_15dp);
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.bottom_nav_padding);
         menuItemContainer.setPadding(0, padding, 0, padding);
         menuItemContainer.setOnClickListener(new View.OnClickListener() {
             @Override

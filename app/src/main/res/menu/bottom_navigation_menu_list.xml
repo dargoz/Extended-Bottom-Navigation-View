@@ -10,7 +10,7 @@
         />
     <item
         android:title="@string/scan_title_text"
-        android:icon="@drawable/baseline_home_black_24"
+        android:icon="@drawable/icon_qr"
         />
     <item
         android:title="@string/notification_title_text"

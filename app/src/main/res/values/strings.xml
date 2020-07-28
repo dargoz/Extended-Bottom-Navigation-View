@@ -5,4 +5,14 @@
     <string name="scan_title_text">SCAN</string>
     <string name="account_title_text">Account</string>
     <string name="notification_title_text">Notification</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_title_text">Home Fragment</string>
+    <string name="notification_fragment_title_text">Notification Fragment</string>
+    <string name="qr_fragment_title_text">Qr Fragment</string>
+    <string name="transaction_fragment_title_text">Transaction Fragment</string>
+    <string name="account_fragment_title_text">Account Fragment</string>
+    <string name="bottom_text">bottom</string>
+    <string name="setting_title_text">Setting</string>
+    <string name="history_title_text">History</string>
 </resources>

@@ -7,7 +7,7 @@
         <attr name="highlightMenuPosition" format="integer"/>
         <attr name="subMenu" format="reference"/>
         <attr name="subMenuType" format="integer"/>
-        <attr name="subMenuBackgroundColor" format="integer|color"/>
+        <attr name="subMenuBackground" format="integer|color|reference"/>
         <attr name="subMenuTextColor" format="integer|color"/>
     </declare-styleable>
 </resources>
