@@ -1,32 +1,33 @@
-package com.example.extendedbottomnavigationview
+package com.example.extendedbottomnavigationview.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.core.view.updateLayoutParams
 import androidx.viewpager.widget.ViewPager
 import com.dargoz.extendedbottomnavigationview.BottomNavigationBar
-import com.dargoz.extendedbottomnavigationview.BottomNavigationBar.SELECTED_NONE
 import com.dargoz.extendedbottomnavigationview.menu.SubMenuOrientation
+import com.example.extendedbottomnavigationview.R
+import com.example.extendedbottomnavigationview.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var visibility = true
-    private var flagInit = false;
+    private var visibility = false
+    private var flagInit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val viewPager = findViewById<ViewPager>(R.id.view_pager)
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager,
-            ViewPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        viewPager.adapter =
+            ViewPagerAdapter(
+                supportFragmentManager,
+                ViewPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+            )
 
         val bottomNavBar = findViewById<BottomNavigationBar>(R.id.bottom_navigation_menu)
         bottomNavBar.viewTreeObserver.addOnGlobalLayoutListener {
@@ -34,21 +35,21 @@ class MainActivity : AppCompatActivity() {
                 initViewPosition(bottomNavBar)
             }
         }
-        bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 1, SubMenuOrientation.VERTICAL)
+        bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 4, SubMenuOrientation.VERTICAL)
         bottomNavBar.setSubMenuTextColor(R.color.colorPrimaryDark)
+        bottomNavBar.showSubMenu(4, false)
 
         bottomNavBar.setMenuOnClickListener { menu, position ->
             Log.i("DRG", "menu : ${menu.getItem(position).title} :: pos : $position")
             viewPager.setCurrentItem(position, false)
             bottomNavBar.setSelectedMenuItem(position)
 
-            if(position == 1) {
-                visibility = !visibility
-                bottomNavBar.showSubMenu(position, visibility)
+            visibility = if(position == 4) {
+                !visibility
             } else {
-                visibility = false
-                bottomNavBar.showSubMenu(1, false)
+                false
             }
+            bottomNavBar.showSubMenu(4, visibility)
         }
         bottomNavBar.setSubMenuOnClickListener { menu, position ->
             Log.i("DRG", "menu : ${menu.getItem(position).title} :: pos : $position")

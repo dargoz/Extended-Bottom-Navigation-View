@@ -1,10 +1,11 @@
-package com.example.extendedbottomnavigationview
+package com.example.extendedbottomnavigationview.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.extendedbottomnavigationview.R
 
 
 class TransactionFragment : Fragment() {
@@ -19,6 +20,7 @@ class TransactionFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = TransactionFragment()
+        fun newInstance() =
+            TransactionFragment()
     }
 }
