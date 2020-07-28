@@ -3,9 +3,27 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 # Extended-Bottom-Navigation-View
-Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.
+Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.<br>
 ![](https://i.imgur.com/ZHqcG9fm.png)
 
+
+# Setup
+1. Add it in your root build.gradle
+```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+2. Add the dependency
+```
+dependencies {
+	implementation 'com.github.dargoz:Extended-Bottom-Navigation-View:Tag'
+}
+```
 
 # Usage
 supported attributes with default values:
@@ -29,18 +47,19 @@ supported attributes with default values:
 
 
 ### Public Methods
+
 |**Return type**|**Method name**|
 |:---|:---|
-| `void` | `addSubMenu(int menuResId, int indexRootMenu, SubMenuOrientation orientation)`
+| `void` | [`addSubMenu(int menuResId, int indexRootMenu, SubMenuOrientation orientation)`](#add-sub-menu)<br> add additional sub menu content to spesific main menu item position.
 | `Menu` | `getMenu()`
 | `ImageView` | `getMenuBackground()`
 | `LinearLayout` | `getMenuChildAt(int position)`
-| `void` | `setHighlightMenuPosition(int position)`
-| `void` | [`setMenuOnClickListener(MenuOnClickListener menuOnClickListener)`](#set-menu-click-listener)
+| `void` | `setHighlightMenuPosition(int position)`<br>set spesific main menu item position as highlighted menu by giving extra `paddingBottom` on it.
+| `void` | [`setMenuOnClickListener(MenuOnClickListener menuOnClickListener)`](#set-menu-click-listener)<br> set bottom navigation main menu callback action on user click.
 | `void` | `setSelectedMenuItem(int itemIndex)`
-| `void` | `setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener)`
-| `void` | `setSubMenuTextColor(int colorResId)`
-| `void` | `showSubMenu(int position, boolean visibility)`
+| `void` | [`setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener)`](#set-submenu-click-listener)
+| `void` | `setSubMenuTextColor(int colorResId)` <br>set color or colorState of sub menu **`title`** text.
+| `void` | `showSubMenu(int position, boolean visibility)` <br>set sub menu `visibility` for given sub menu `position`. <br>`true`: set view to `VISIBLE`. <br>`false`: set view to `GONE`.
 
 
 ### Set Menu List item
@@ -81,6 +100,16 @@ supported attributes with default values:
         app:menu="@menu/bottom_navigation_menu_list"/>
 ```
 
+### Add Sub Menu
+```kotlin
+bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 4, SubMenuOrientation.VERTICAL)
+```
+this method consist 3 input parameters:
+- **`menuResId`** : required **menu** type of resources in menu resource directory.
+- **`indexRootMenu`** : index of menu to add the sub menu content.
+- **`orientation`** : sub menu container orientation style. you can choose between **`HORIZONTAL`** and **`VERTICAL`**.
+
+
 ### Set Menu Click Listener
 Use `setMenuOnClickListener` to receive callback action from clicked menu context.
 ```kotlin
@@ -90,5 +119,12 @@ bottomNavBar.setMenuOnClickListener { menu, position ->
 }
 ```
 this method consist 2 parameters:
--  **menu** : return `Menu` object that contain menu `title` and menu `icon` value.
-- **position** : return `integer` value of clicked menu position. (start from 0)
+- **`menu`** : return **`Menu`** object that contain menu **`title`** and menu **`icon`** value.
+- **`position`** : return **`integer`** value of clicked menu position. (start from 0)
+
+### Set SubMenu Click Listener
+```kotlin
+bottomNavBar.setSubMenuOnClickListener { menu, position -> 
+            //Your code here
+}
+```
