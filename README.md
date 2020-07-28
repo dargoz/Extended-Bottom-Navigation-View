@@ -33,6 +33,9 @@ supported attributes with default values:
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
 ```
+**NOTE: Due to better user experience for bottom navigation, this View only supports a maximum of 5 main content.**
+
+
 
 |**Attrs**|**Related methods**|**Default value**|
 |:---|:---|:---|
@@ -52,11 +55,11 @@ supported attributes with default values:
 |:---|:---|
 | `void` | [`addSubMenu(int menuResId, int indexRootMenu, SubMenuOrientation orientation)`](#add-sub-menu)<br> add additional sub menu content to spesific main menu item position.
 | `Menu` | `getMenu()`
-| `ImageView` | `getMenuBackground()`
-| `LinearLayout` | `getMenuChildAt(int position)`
+| `ImageView` | `getMenuBackground()` <br> return bottomNavBar menu background container.
+| `LinearLayout` | `getMenuChildAt(int position)` <br> return the layout container of given main menu item `position`.
 | `void` | `setHighlightMenuPosition(int position)`<br>set spesific main menu item position as highlighted menu by giving extra `paddingBottom` on it.
 | `void` | [`setMenuOnClickListener(MenuOnClickListener menuOnClickListener)`](#set-menu-click-listener)<br> set bottom navigation main menu callback action on user click.
-| `void` | `setSelectedMenuItem(int itemIndex)`
+| `void` | `setSelectedMenuItem(int itemIndex)` <br> set the given main menu `position` as **selected**. this method will make **`icon`** and **`title`** changes their selection state value as **`true`** (also known as `android:state_selected="true"` if using custom drawable selector state).
 | `void` | [`setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener)`](#set-submenu-click-listener)
 | `void` | `setSubMenuTextColor(int colorResId)` <br>set color or colorState of sub menu **`title`** text.
 | `void` | `showSubMenu(int position, boolean visibility)` <br>set sub menu `visibility` for given sub menu `position`. <br>`true`: set view to `VISIBLE`. <br>`false`: set view to `GONE`.
