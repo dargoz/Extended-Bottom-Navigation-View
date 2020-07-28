@@ -4,6 +4,7 @@
 
 # Extended-Bottom-Navigation-View
 Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.
+[![](https://i.imgur.com/ZHqcG9fm.png)]
 
 
 # Usage
@@ -43,7 +44,7 @@ supported attributes with default values:
 
 
 ### Set Menu List item
-1. create `.xml` menu resource type under `res\menu\<your_resource_name>.xml`
+1. create `.xml` **menu resource** inside menu resource directory. (`res\menu\<your_resource_name>.xml`)
 <br>Example:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -70,7 +71,7 @@ supported attributes with default values:
         />
 </menu>
 ```
-2. add your menu resource as input to `app:menu` attribute in `layout.xml`
+2. add your menu resource as input to `app:menu` BottomNavigationBar attribute in `layout.xml`
 ```xml
 <com.dargoz.extendedbottomnavigationview.BottomNavigationBar
         android:id="@+id/bottom_navigation_menu"
