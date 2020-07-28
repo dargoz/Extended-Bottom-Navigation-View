@@ -4,7 +4,7 @@
 
 # Extended-Bottom-Navigation-View
 Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.
-[![](https://i.imgur.com/ZHqcG9fm.png)]
+[](https://i.imgur.com/ZHqcG9fm.png)
 
 
 # Usage
