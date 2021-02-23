@@ -76,3 +76,6 @@ Release tag notes:
 
 - v 0.4.0
   - enhance subMenu constraint validation on right corner
+
+- v 0.4.2
+  - add capability to replace menu title text to ImageView

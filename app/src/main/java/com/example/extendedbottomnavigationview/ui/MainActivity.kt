@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 initViewPosition(bottomNavBar)
             }
         }
+        bottomNavBar.replaceMenuTextToImage(2, R.drawable.baseline_credit_card_black_18)
         bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 4, SubMenuOrientation.VERTICAL)
         bottomNavBar.setSubMenuTextColor(R.color.colorPrimaryDark)
         bottomNavBar.showSubMenu(4, false)

@@ -64,6 +64,7 @@ supported attributes with default values:
 | `void` | [`setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener)`](#set-submenu-click-listener)
 | `void` | `setSubMenuTextColor(int colorResId)` <br>set color or colorState of sub menu **`title`** text.
 | `void` | `showSubMenu(int position, boolean visibility)` <br>set sub menu `visibility` for given sub menu `position`. <br>`true`: set view to `VISIBLE`. <br>`false`: set view to `GONE`.
+| `void` | `replaceMenuTextToImage(int position, int imageResourceId)` <br>replace menu `titleText` for given menu `position` with given ImageResource.
 
 
 ### Set Menu List item
