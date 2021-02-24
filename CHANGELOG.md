@@ -79,3 +79,6 @@ Release tag notes:
 
 - v 0.4.2
   - add capability to replace menu title text to ImageView
+  
+- v 0.4.3
+  - Fix exception Cannot Cast ImageView to TextView due to replacement View using method replaceMenuTextToImage(..)

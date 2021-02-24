@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         val bottomNavBar = findViewById<BottomNavigationBar>(R.id.bottom_navigation_menu)
         bottomNavBar.addSubMenu(R.menu.sub_menu_navigation_list, 1, SubMenuOrientation.VERTICAL)
         bottomNavBar.setSubMenuTextColor(R.color.colorPrimaryDark)
-
         bottomNavBar.setMenuOnClickListener { menu, position ->
             Log.i("DRG", "menu : ${menu.getItem(position).title} :: pos : $position")
             visibility = !visibility

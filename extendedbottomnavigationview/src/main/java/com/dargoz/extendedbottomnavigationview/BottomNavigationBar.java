@@ -136,9 +136,16 @@ public class BottomNavigationBar extends FrameLayout {
     public void setHighlightMenuPosition(int position) {
         this.highlightMenuPosition = position;
         LinearLayout menuLayout = getMenuChildAt(position);
-        TextView titleText = (TextView) menuLayout.getChildAt(1);
-        titleText.setTextSize(TypedValue.DENSITY_DEFAULT, getResources().getDimensionPixelSize(R.dimen.highlight_text_size));
-        titleText.setSelected(true);
+        View titleTextView = menuLayout.getChildAt(1);
+        if (titleTextView instanceof TextView) {
+            Log.d("DRG","textView");
+            ((TextView)titleTextView)
+                    .setTextSize(
+                            TypedValue.DENSITY_DEFAULT,
+                            getResources().getDimensionPixelSize(R.dimen.highlight_text_size));
+
+        }
+        titleTextView.setSelected(true);
     }
 
     public void replaceMenuTextToImage(int position, int imageResourceId) {
@@ -392,8 +399,11 @@ public class BottomNavigationBar extends FrameLayout {
                 R.color.default_color_state : menuItemTextColor);
         for (int i = 0; i < menu.size(); i++) {
             LinearLayout menuLayout = getMenuChildAt(i);
-            TextView textView = (TextView) menuLayout.getChildAt(1);
-            textView.setTextColor(colorStateList);
+            View titleView = menuLayout.getChildAt(1);
+            if(titleView instanceof TextView) {
+                ((TextView)titleView).setTextColor(colorStateList);
+            }
+
         }
     }
 
@@ -416,7 +426,7 @@ public class BottomNavigationBar extends FrameLayout {
         LinearLayout menuLayout = getMenuChildAt(itemIndex);
         int imageId = imageIconIds.get(itemIndex,-1);
         ImageView imageIcon = menuLayout.findViewById(imageId);
-        TextView titleText = (TextView) menuLayout.getChildAt(1);
+        View titleText = menuLayout.getChildAt(1);
         imageIcon.setSelected(flagSelected);
         titleText.setSelected(flagSelected);
     }
