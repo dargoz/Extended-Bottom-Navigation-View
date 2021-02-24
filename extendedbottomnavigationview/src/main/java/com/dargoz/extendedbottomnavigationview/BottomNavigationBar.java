@@ -1,5 +1,18 @@
+/*  Copyright 2020 Davin Reinaldo Gozali
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+**/
 package com.dargoz.extendedbottomnavigationview;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -15,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -118,13 +132,25 @@ public class BottomNavigationBar extends FrameLayout {
         }
     }
 
-    @SuppressWarnings("unused")
+
     public void setHighlightMenuPosition(int position) {
         this.highlightMenuPosition = position;
         LinearLayout menuLayout = getMenuChildAt(position);
         TextView titleText = (TextView) menuLayout.getChildAt(1);
         titleText.setTextSize(TypedValue.DENSITY_DEFAULT, getResources().getDimensionPixelSize(R.dimen.highlight_text_size));
         titleText.setSelected(true);
+    }
+
+    public void replaceMenuTextToImage(int position, int imageResourceId) {
+        LinearLayout menuLayout = getMenuChildAt(position);
+        menuLayout.removeViewAt(1);
+        ImageView imageView = new ImageView(getContext());
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, WRAP_CONTENT);
+        imageView.setLayoutParams(imageParams);
+        imageView.setImageResource(imageResourceId);
+        imageView.setId(View.generateViewId());
+        menuLayout.addView(imageView);
     }
 
     public void showSubMenu(int position, boolean visibility) {
@@ -137,7 +163,6 @@ public class BottomNavigationBar extends FrameLayout {
         }
     }
 
-    @SuppressWarnings("unused")
     public void addSubMenu(int menuResId, int indexRootMenu, SubMenuOrientation orientation) {
         Context context = getContext();
         Menu subMenu = new BottomNavigationMenu(context);
@@ -167,14 +192,7 @@ public class BottomNavigationBar extends FrameLayout {
             Log.i(TAG, "index : " + index);
             LinearLayout subMenuLayout = subMenuItemLayout.constructMenu(subMenu, index);
             subMenuLayout.setContentDescription("BottomNav SubMenu - " + subMenu.getItem(index).getTitle());
-            if(subMenuType == -1 || subMenuType == 1) {
-                if(drawable == null) {
-                    subMenuLayout.setBackgroundResource(subMenuBackground);
-                } else {
-                    subMenuLayout.setBackground(drawable);
-                }
-
-            }
+            setSubMenuBackground(drawable, subMenuLayout);
             subMenuContainer.addView(subMenuLayout);
         }
         if(subMenuType == 2) {
@@ -197,6 +215,17 @@ public class BottomNavigationBar extends FrameLayout {
                 menuLayout.getId(),
                 indexRootMenu > 2 ? ConstraintSet.END : ConstraintSet.START, 0);
         constraintSet.applyTo(bottomNavBaseContainer);
+    }
+
+    private void setSubMenuBackground(Drawable drawable, LinearLayout subMenuLayout) {
+        if(subMenuType == -1 || subMenuType == 1) {
+            if(drawable == null) {
+                subMenuLayout.setBackgroundResource(subMenuBackground);
+            } else {
+                subMenuLayout.setBackground(drawable);
+            }
+
+        }
     }
 
     private void init(Context context) {

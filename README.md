@@ -2,6 +2,7 @@
 [![](https://jitpack.io/v/dargoz/Extended-Bottom-Navigation-View.svg)](https://jitpack.io/#dargoz/Extended-Bottom-Navigation-View)
 [![License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
+
 # Extended-Bottom-Navigation-View
 Android Custom View for Bottom Navigation (Using ConstraintLayout as baseLayout) with customizable sub-menu content.<br>
 ![](https://i.imgur.com/ZHqcG9fm.png)
@@ -63,12 +64,12 @@ supported attributes with default values:
 | `void` | [`setSubMenuOnClickListener(MenuOnClickListener subMenuOnClickListener)`](#set-submenu-click-listener)
 | `void` | `setSubMenuTextColor(int colorResId)` <br>set color or colorState of sub menu **`title`** text.
 | `void` | `showSubMenu(int position, boolean visibility)` <br>set sub menu `visibility` for given sub menu `position`. <br>`true`: set view to `VISIBLE`. <br>`false`: set view to `GONE`.
+| `void` | `replaceMenuTextToImage(int position, int imageResourceId)` <br>replace menu `titleText` for given menu `position` with given ImageResource.
 
 
 ### Set Menu List item
 1. create `.xml` **menu resource** inside menu resource directory. (`res\menu\<your_resource_name>.xml`)
 <br>Example:
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -94,8 +95,7 @@ supported attributes with default values:
         />
 </menu>
 ```
-2. add your menu resource as input to `app:menu` BottomNavigationBar attribute in `layout.xml` <br>
-
+2. add your menu resource as input to `app:menu` BottomNavigationBar attribute in `layout.xml`
 ```xml
 <com.dargoz.extendedbottomnavigationview.BottomNavigationBar
         android:id="@+id/bottom_navigation_menu"
