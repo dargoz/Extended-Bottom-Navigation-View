@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_size">12dp</dimen>
+    <dimen name="bottom_nav_padding">15dp</dimen>
+    <dimen name="highlight_text_size">18dp</dimen>
+
+    <dimen name="baseline_0dp">0dp</dimen>
+    <dimen name="baseline_1dp">1dp</dimen>
+    <dimen name="baseline_2dp">2dp</dimen>
+    <dimen name="baseline_3dp">3dp</dimen>
+    <dimen name="baseline_4dp">4dp</dimen>
+    <dimen name="baseline_5dp">5dp</dimen>
+    <dimen name="baseline_6dp">6dp</dimen>
+    <dimen name="baseline_7dp">7dp</dimen>
+    <dimen name="baseline_8dp">8dp</dimen>
+    <dimen name="baseline_9dp">9dp</dimen>
+    <dimen name="baseline_10dp">10dp</dimen>
+    <dimen name="baseline_11dp">11dp</dimen>
+    <dimen name="baseline_12dp">12dp</dimen>
+    <dimen name="baseline_13dp">13dp</dimen>
+    <dimen name="baseline_14dp">14dp</dimen>
+    <dimen name="baseline_16dp">16dp</dimen>
+    <dimen name="baseline_17dp">17dp</dimen>
+    <dimen name="baseline_18dp">18dp</dimen>
+    <dimen name="baseline_19dp">19dp</dimen>
+    <dimen name="baseline_20dp">20dp</dimen>
+    <dimen name="baseline_21dp">21dp</dimen>
+    <dimen name="baseline_22dp">22dp</dimen>
+
+</resources>

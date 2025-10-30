@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_size">16dp</dimen>
+    <dimen name="bottom_nav_padding">26dp</dimen>
+    <dimen name="highlight_text_size">22dp</dimen>
+</resources>

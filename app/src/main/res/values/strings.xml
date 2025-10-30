@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Extended Bottom Navigation View</string>
+    <string name="fragment_1_title_text">Fragment 1</string>
+    <string name="fragment_2_title_text">Fragment 2</string>
+    <string name="fragment_3_title_text">Fragment 3</string>
+    <string name="fragment_5_title_text">Fragment 4</string>
+    <string name="fragment_4_title_text">Fragment 5</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_1_text">Fragment 1</string>
+    <string name="fragment_2_text">Fragment 2</string>
+    <string name="fragment_3_text">Fragment 3</string>
+    <string name="fragment_4_text">Fragment 4</string>
+    <string name="fragment_5_text">Fragment 5</string>
+    <string name="bottom_text">bottom</string>
+    <string name="setting_title_text">Setting 1</string>
+    <string name="history_title_text">Setting 2</string>
+</resources>
